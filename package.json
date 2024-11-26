@@ -4,9 +4,17 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "2.11.8",
+<<<<<<< HEAD
     "bootstrap": "5.3.3",
     "chart.js": "4.4.6",
     "react": "18.3.1",
+=======
+    "axios": "0.16.2",
+    "bootstrap": "^5.3.3",
+    "chart.js": "4.4.6",
+    "react": "18.3.1",
+    "react-bootstrap": "^2.10.6",
+>>>>>>> 9013b227843f980b8b24df67fbee8a54a883da5f
     "react-chartjs-2": "5.2.0",
     "react-dom": "18.3.1",
     "react-router-dom": "6.28.0",
@@ -20,4 +28,21 @@
   },
   "devDependencies": {
     "react-scripts": "latest"
+<<<<<<< HEAD
   }
+=======
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+>>>>>>> 9013b227843f980b8b24df67fbee8a54a883da5f

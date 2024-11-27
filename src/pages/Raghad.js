@@ -1,6 +1,6 @@
 import React from "react";
-import useFetchData from "../hooks/useApiData"; // Import the custom hook
-import { Card, Col, Row, Spinner } from "react-bootstrap"; //style the card
+//import useFetchData from "../hooks/useApiData"; // Import the custom hook
+//import { Card, Col, Row, Spinner } from "react-bootstrap"; //style the card
 
 const Raghad = ({ title }) => {
   const url = undefined;

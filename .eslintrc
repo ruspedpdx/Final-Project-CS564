@@ -1,6 +1,7 @@
 {
   "extends": [
     "airbnb",
+    "plugin:react/recommended",
     "prettier"
   ],
   "plugins": [
@@ -9,5 +10,9 @@
 
   "env": {
     "browser": true,
-}
+    "es6":true
+  },
+"rules": {
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }]
+  }
 }

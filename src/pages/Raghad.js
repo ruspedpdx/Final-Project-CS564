@@ -1,66 +1,181 @@
-import React from "react";
-import { Card, Col, Row, Spinner } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 
-const url =
-  "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=Abbvh46FGz2Bhf4Ogu9HoN2arZKxkoJImRk48bRq&school.state=OR";
+const API_KEY = "Abbvh46FGz2Bhf4Ogu9HoN2arZKxkoJImRk48bRq";
+const States = [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
+];
+
 function APIData() {
+  const [selectedState, setSelectedState] = useState("OR"); // State for the selected state
+  const [url, setUrl] = useState(""); // API URL
+
   const { data: result, isLoaded, isError } = useApiData(url);
-  console.log("result", result);
-  if (isError) {
-    return <div>Error: Unable to fetch data!</div>;
-  }
+  console.log(result);
+
+  // Update the URL whenever the selected state changes
+  useEffect(() => {
+    if (selectedState) {
+      setUrl(
+        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${API_KEY}&school.state=${selectedState}&sort=latest.student.size:desc`
+      );
+    } else {
+      setUrl(""); // Clear URL when no state is selected
+    }
+  }, [selectedState]);
+
+  const handleStateChange = (event) => {
+    setSelectedState(event.target.value); // Update the selected state
+  };
+
+  const handleClearSelection = () => {
+    setSelectedState(""); // Clear the selection
+  };
+
   return (
     <main className="container">
-      <h2 className="text-center m-4">`Raghad Page`</h2>
+      <h2 className="text-center m-4">USA Colleges Snapshot </h2>
+
+      {/* State Selector */}
+      <div className="mb-4">
+        <Form.Select
+          value={selectedState}
+          onChange={handleStateChange}
+          aria-label="Select a state"
+        >
+          <option value="">Select a state</option>
+          {States.map((stateCode) => (
+            <option key={stateCode} value={stateCode}>
+              {stateCode}
+            </option>
+          ))}
+        </Form.Select>
+        <Button
+          variant="secondary"
+          className="mt-2"
+          onClick={handleClearSelection}
+        >
+          Clear Selection
+        </Button>
+      </div>
+
+      {/* Error Handling */}
+      {isError && <div>Error: Unable to fetch data!</div>}
 
       {/* Loading Spinner */}
-      {!isLoaded && (
+      {!isLoaded && url && (
         <div className="text-center">
           <Spinner animation="border" role="status" />
           <span>Loading...</span>
         </div>
       )}
 
-      {/* No results found */}
-      {isLoaded && result.length === 0 && <div>No universities found.</div>}
+      {/* No Results Found */}
+      {isLoaded && result && result.length === 0 && (
+        <div>No universities found.</div>
+      )}
+
+      {/* Display Results */}
       <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-        {result&& result.results.map((item) => (
-          <Col key={item.id}>
-            {/* Using a unique key (id) for each item */}
-            <Card className="d-flex" style={{ height: "250px" }}>
-              <Card.Body className="text-center">
-                <Card.Title>
-                  {item.school.name || "City Not Available"}
-                </Card.Title>
+        {result &&
+          result.results.map((item) => (
+            <Col key={item.id}>
+              <Card
+                border="warning"
+                className="d-flex"
+                style={{ height: "300px" }}
+              >
+                <Card.Body className="text-center" border="dark">
+                  <Card.Header variant="top" style={{ height: "90px" }}>
+                    <h5>{item.school.name || "City Not Available"}</h5>
+                  </Card.Header>
 
-                <Card.Text className="m-2">
-                  <p>City: {item.school.city || "School Name Not Available"}</p>
-                  <p>
-                    Avg Net Price:
-                    {item.latest.cost.avg_net_price.overall ||
-                      "Tuition Info Not Available"}
-                  </p>
-
-                  {/* School website URL */}
-                  {item.school.school_url ? (
+                  <Card.Text className="m-2" style={{ height: "120px" }}>
                     <p>
+                      City: {item.school.city || "School Name Not Available"}
+                    </p>
+                    <p>
+                      Size:{" "}
+                      {item.latest.student.size || "Student Size Not Available"}
+                    </p>
+                    <p>
+                      Cost:{" "}
+                      {item.latest.cost.attendance.academic_year ||
+                        "Tuition Info Not Available"}
+                    </p>
+                  </Card.Text>
+                  <Card.Footer variant="bottom">
+                    {item.school.school_url ? (
                       <a
-                        href={item.school.school_url}
+                        href={
+                          item.school.school_url.startsWith("http://") ||
+                          item.school.school_url.startsWith("https://")
+                            ? item.school.school_url
+                            : `http://${item.school.school_url}`
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         Visit School Website
                       </a>
-                    </p>
-                  ) : (
-                    <p>No Website Available</p>
-                  )}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+                    ) : (
+                      <p>No Website Available</p>
+                    )}
+                  </Card.Footer>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
       </Row>
     </main>
   );

@@ -1,8 +1,10 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
 import useApiData from "../hooks/useApiData";
 import buildSearchByNameUrl from "../Utils/buildUrl";
 
-const SearchPage = () => {
+function SearchPage() {
   const [schoolName, setSchoolName] = useState("");
   const [url, setUrl] = useState("");
   const [showResults, setShowResults] = useState(false);
@@ -30,7 +32,7 @@ const SearchPage = () => {
 
       {!showResults && (
         <form onSubmit={handleSubmit} className="my-3">
-          <label>School Name: </label>
+         {/* <label>School Name: </label> */}
           <input
             type="text"
             value={schoolName}
@@ -68,6 +70,6 @@ const SearchPage = () => {
       {error && <div>Error: {error}</div>}
     </div>
   );
-};
+}
 
 export default SearchPage;

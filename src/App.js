@@ -8,21 +8,21 @@ import Raghad from "./pages/Raghad";
 import Russ from "./pages/Russ";
 import SearchPage from "./pages/SearchPage";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <NavMenu />
 
       <Routes>
-        <Route path="/" element={<Home title="Home Page" />} />
+        <Route path="/" element={<Home/>} />
         <Route
           path="/SearchPage"
           element={<SearchPage title="Search Page" />}
         />
-        <Route path="/Raghad" element={<Raghad title="Raghad Page" />} />
+        <Route path="/Raghad" element={<Raghad/>} />
         <Route path="/Russ" element={<Russ title="Russ Page" />} />
       </Routes>
     </Router>
   );
-};
+}
 export default App;

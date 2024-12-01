@@ -3,7 +3,7 @@ import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 import States from "../components/statesList"; // state list to be used in the search dropdwon
 
-const RA_API_KEY = process.env.API_KEY;
+const apiKeyRa = process.env.RA_API_KEY;
 
 function APIData() {
   const [selectedState, setSelectedState] = useState("OR"); // State for the selected state
@@ -15,7 +15,7 @@ function APIData() {
   useEffect(() => {
     if (selectedState) {
       setUrl(
-        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${RA_API_KEY}&school.state=${selectedState}&sort=latest.student.size:desc`
+        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${apiKeyRa}&school.state=${selectedState}&sort=latest.student.size:desc`
       );
     } else {
       setUrl(""); // Clear URL when no state is selected

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useApiData from "../hooks/useApiData";
-import buildSearchByNameUrl from "../Utils/buildUrl";
+import buildSearchByNameUrl from "../utils/buildUrl";
 
 const SearchPage = () => {
   const [schoolName, setSchoolName] = useState("");

@@ -3,7 +3,8 @@ import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 import States from "../components/statesList"; // state list to be used in the search dropdwon
 
-const RA_API_KEY = process.env.API_KEY;
+const API_KEY = "Abbvh46FGz2Bhf4Ogu9HoN2arZKxkoJImRk48bRq";
+// const API_KEY = process.env.RA_API_KEY;
 
 function APIData() {
   const [selectedState, setSelectedState] = useState("OR"); // State for the selected state
@@ -15,7 +16,7 @@ function APIData() {
   useEffect(() => {
     if (selectedState) {
       setUrl(
-        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${RA_API_KEY}&school.state=${selectedState}&sort=latest.student.size:desc`
+        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${API_KEY}&school.state=${selectedState}&sort=latest.student.size:desc`
       );
     } else {
       setUrl(""); // Clear URL when no state is selected
@@ -106,7 +107,7 @@ function APIData() {
                     </p>
                   </Card.Text>
                   <Card.Footer
-                    className="d-flex justify-content-center align-items-center"
+                    className="justify-content-center align-items-center"
                     variant="bottom"
                     style={{ height: "6rem" }}
                   >
@@ -128,9 +129,8 @@ function APIData() {
                         <p>No Website Available</p>
                       )}
                     </div>
-                    <div>
-                      {" "}
-                      <p>click for more cost details</p>
+                    <div className="m-3">
+                      <p>Cost Details</p>
                     </div>
                   </Card.Footer>
                 </Card.Body>

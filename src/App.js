@@ -10,6 +10,7 @@ import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
+    // eslint-disable-next-line react/jsx-filename-extension
     <Router>
       <NavMenu />
 

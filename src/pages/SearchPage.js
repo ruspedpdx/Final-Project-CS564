@@ -32,7 +32,7 @@ function SearchPage() {
 
       {!showResults && (
         <form onSubmit={handleSubmit} className="my-3">
-         {/* <label>School Name: </label> */}
+          {/* <label>School Name: </label> */}
           <input
             type="text"
             value={schoolName}

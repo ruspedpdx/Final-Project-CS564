@@ -18,7 +18,7 @@ const useApiData = (url) => {
         setData(response.data);
         setIsLoaded(true);
       } catch (err) {
-        setError("Failed to fetch data: " + err.message);
+        setError(`Failed to fetch data: ${err.message}`);
         setIsLoaded(true); // Ensure loading state is stopped even if there's an error
       }
     };

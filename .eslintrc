@@ -1,12 +1,26 @@
-// {
-//   "extends": [
-//     "airbnb",
-//     "prettier"
-//   ],
-//   "plugins": [
-//     "prettier"
-//   ],
-//   "env": {
-//     "browser": true
-//   }
-// }
+{
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  
+  "plugins": [
+    "prettier"
+  ],
+
+  "env": {
+    "browser": true,
+    "es6":true
+  },
+
+  "rules": {
+        "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "Label" ],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false,
+        }]
+    }
+}

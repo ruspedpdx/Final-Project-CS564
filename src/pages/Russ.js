@@ -1,177 +1,18 @@
 import React, { useEffect, useState } from "react";
+import Currencies from "../components/currencyList"; // currency list
 
-const CurrencyConverter = ({ title }) => {
+function CurrencyConverter() {
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [conversionRate, setConversionRate] = useState(null);
   const [loading, setLoading] = useState(false);
   const basePrice = 1.0;
+  // const apiKeyRu = process.env.REACT_APP_API_KEY_RU;
 
-  const currencies = [
-    "AED",
-    "AFN",
-    "ALL",
-    "AMD",
-    "ANG",
-    "AOA",
-    "ARS",
-    "AUD",
-    "AWG",
-    "AZN",
-    "BAM",
-    "BBD",
-    "BDT",
-    "BGN",
-    "BHD",
-    "BIF",
-    "BMD",
-    "BND",
-    "BOB",
-    "BRL",
-    "BSD",
-    "BTN",
-    "BWP",
-    "BYN",
-    "BZD",
-    "CAD",
-    "CDF",
-    "CHF",
-    "CLP",
-    "CNY",
-    "COP",
-    "CRC",
-    "CUP",
-    "CVE",
-    "CZK",
-    "DJF",
-    "DKK",
-    "DOP",
-    "DZD",
-    "EGP",
-    "ERN",
-    "ETB",
-    "EUR",
-    "FJD",
-    "FKP",
-    "FOK",
-    "GBP",
-    "GEL",
-    "GGP",
-    "GHS",
-    "GIP",
-    "GMD",
-    "GNF",
-    "GTQ",
-    "GYD",
-    "HKD",
-    "HNL",
-    "HRK",
-    "HTG",
-    "HUF",
-    "IDR",
-    "ILS",
-    "IMP",
-    "INR",
-    "IQD",
-    "IRR",
-    "ISK",
-    "JEP",
-    "JMD",
-    "JOD",
-    "JPY",
-    "KES",
-    "KGS",
-    "KHR",
-    "KID",
-    "KMF",
-    "KRW",
-    "KWD",
-    "KYD",
-    "KZT",
-    "LAK",
-    "LBP",
-    "LKR",
-    "LRD",
-    "LSL",
-    "LYD",
-    "MAD",
-    "MDL",
-    "MGA",
-    "MKD",
-    "MMK",
-    "MNT",
-    "MOP",
-    "MRU",
-    "MUR",
-    "MVR",
-    "MWK",
-    "MXN",
-    "MYR",
-    "MZN",
-    "NAD",
-    "NGN",
-    "NIO",
-    "NOK",
-    "NPR",
-    "NZD",
-    "OMR",
-    "PAB",
-    "PEN",
-    "PGK",
-    "PHP",
-    "PKR",
-    "PLN",
-    "PYG",
-    "QAR",
-    "RON",
-    "RSD",
-    "RUB",
-    "RWF",
-    "SAR",
-    "SBD",
-    "SCR",
-    "SDG",
-    "SEK",
-    "SGD",
-    "SHP",
-    "SLE",
-    "SOS",
-    "SRD",
-    "SSP",
-    "STN",
-    "SYP",
-    "SZL",
-    "THB",
-    "TJS",
-    "TMT",
-    "TND",
-    "TOP",
-    "TRY",
-    "TTD",
-    "TVD",
-    "TWD",
-    "TZS",
-    "UAH",
-    "UGX",
-    "UYU",
-    "UZS",
-    "VES",
-    "VND",
-    "VUV",
-    "WST",
-    "XAF",
-    "XCD",
-    "XDR",
-    "XOF",
-    "XPF",
-    "YER",
-    "ZAR",
-    "ZMW",
-  ];
+  // console.log(process.env.REACT_APP_API_KEY_RU);
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
-      const apiUrl =
-        "https://v6.exchangerate-api.com/v6/596e420d956e4e62b48103eb/latest/USD";
+      const apiUrl = `https://v6.exchangerate-api.com/v6/596e420d956e4e62b48103eb/latest/USD`;
 
       setLoading(true); // Show loading while fetching
       try {
@@ -198,8 +39,9 @@ const CurrencyConverter = ({ title }) => {
         setLoading(false);
       }
     };
-
-    fetchExchangeRate();
+    if (selectedCurrency) {
+      fetchExchangeRate();
+    }
   }, [selectedCurrency]); // Re-fetch data when the selected currency changes
 
   return (
@@ -211,7 +53,7 @@ const CurrencyConverter = ({ title }) => {
         value={selectedCurrency}
         onChange={(e) => setSelectedCurrency(e.target.value)}
       >
-        {currencies.map((currency) => (
+        {Currencies.map((currency) => (
           <option key={currency} value={currency}>
             {currency}
           </option>
@@ -232,6 +74,6 @@ const CurrencyConverter = ({ title }) => {
       )}
     </div>
   );
-};
+}
 
 export default CurrencyConverter;

@@ -15,7 +15,7 @@ function APIData() {
   useEffect(() => {
     if (selectedState) {
       setUrl(
-        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=Abbvh46FGz2Bhf4Ogu9HoN2arZKxkoJImRk48bRq&school.state=${selectedState}&sort=latest.student.size:desc`
+        `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=API_KEY&school.state=${selectedState}&sort=latest.student.size:desc`
       );
     } else {
       setUrl(""); // Clear URL when no state is selected

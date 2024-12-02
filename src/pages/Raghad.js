@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 import States from "../components/statesList"; // state list to be used in the search dropdwon
+// import { Navigate } from "react-router-dom";
 
 const API_KEY = "Abbvh46FGz2Bhf4Ogu9HoN2arZKxkoJImRk48bRq";
 // const API_KEY = process.env.RA_API_KEY;
@@ -31,7 +32,7 @@ function APIData() {
     setSelectedState(""); // Clear the selection
   };
   return (
-    <main className="container , bg-light">
+    <main className="container ,m-3, bg-light">
       <h2 className="text-center p-4 m-4">USA Colleges Snapshot </h2>
 
       {/* State Selector */}
@@ -131,6 +132,7 @@ function APIData() {
                     </div>
                     <div className="m-3">
                       <p>Cost Details</p>
+                      {/* navigate("/russ",{School:{}}) */}
                     </div>
                   </Card.Footer>
                 </Card.Body>

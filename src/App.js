@@ -14,13 +14,13 @@ function App() {
       <NavMenu />
 
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route
-          path="/SearchPage"
-          element={<SearchPage title="Search Page" />}
-        />
-        <Route path="/Raghad" element={<Raghad/>} />
-        <Route path="/Russ" element={<Russ title="Russ Page" />} />
+        {" "}
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/searchPage" element={<SearchPage />} />
+        <Route path="/raghad" element={<Raghad />} />
+        <Route path="/russ" element={<Russ title="Russ Page" />} />
+        <Route path="*" element={<div>404: Page Not Found</div>} />
       </Routes>
     </Router>
   );

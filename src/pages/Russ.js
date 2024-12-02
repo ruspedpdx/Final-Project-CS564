@@ -6,13 +6,11 @@ function CurrencyConverter() {
   const [conversionRate, setConversionRate] = useState(null);
   const [loading, setLoading] = useState(false);
   const basePrice = 1.0;
-  // const apiKeyRu = process.env.REACT_APP_API_KEY_RU;
-
-  // console.log(process.env.REACT_APP_API_KEY_RU);
+  const apiKeyRu = process.env.REACT_APP_API_KEY_RU;
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
-      const apiUrl = `https://v6.exchangerate-api.com/v6/596e420d956e4e62b48103eb/latest/USD`;
+      const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKeyRu}/latest/USD`;
 
       setLoading(true); // Show loading while fetching
       try {

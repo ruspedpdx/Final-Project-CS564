@@ -3,7 +3,7 @@ import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 import States from "../components/statesList"; // state list to be used in the search dropdwon
 // import { Navigate } from "react-router-dom";
-const apiKeyRa = process.env.REACT_APP_API_KEY_RA;
+const apiKeyRa = process.env.REACT_APP_API_KEY;
 
 function APIData() {
   const [selectedState, setSelectedState] = useState("OR"); // State for the selected state

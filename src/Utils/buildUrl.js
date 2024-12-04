@@ -2,7 +2,7 @@
 const buildSearchByNameUrl = ({ name, fields = [] }) => {
   const baseUrl = "https://api.data.gov/ed/collegescorecard/v1/schools";
   const params = new URLSearchParams();
-  const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY_RA;
 
   // Add the API key
   params.append("api_key", apiKey);

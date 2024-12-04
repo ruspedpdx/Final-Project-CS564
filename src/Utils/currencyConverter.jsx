@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
 import Currencies from "../components/currencyList"; // currency list
 
@@ -73,5 +75,4 @@ function CurrencyConverter() {
     </div>
   );
 }
-
 export default CurrencyConverter;

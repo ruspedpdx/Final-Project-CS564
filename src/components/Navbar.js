@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import mortarboard from "./logo.svg";
 
 function NavMenu() {
@@ -24,23 +25,17 @@ function NavMenu() {
             <Nav.Link as={Link} to="/Home" className="text-light">
               Home
             </Nav.Link>
-            <NavDropdown title="Dat page" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/Dat" className=" text-center">
-                Dat Sub_Page
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#" className="text-center ">
-                Placeholder for items
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#" className="text-center">
-                Width = content width
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link as={Link} to="/SearchPage" className="text-light">
+              {" "}
+              Search by Name
+            </Nav.Link>
             <Nav.Link as={Link} to="/Raghad" className="text-light">
               {" "}
               Raghad Page
             </Nav.Link>
-            <Nav.Link as={Link} to="/Russ" className="text-light">
-              Russ Page
+            <Nav.Link as={Link} to="/Dashboard" className="text-light">
+              {" "}
+              School Information
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavMenu from "./components/Navbar";
 import Home from "./pages/Home";
 import Raghad from "./pages/Raghad";
-import Russ from "./pages/Russ";
+import Dashboard from "./pages/Dashboard";
 import SearchPage from "./pages/SearchPage";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/searchPage" element={<SearchPage />} />
         <Route path="/raghad" element={<Raghad />} />
-        <Route path="/russ" element={<Russ title="Russ Page" />} />
+        <Route path="/dashboard" element={<Dashboard title="Results" />} />
         <Route path="*" element={<div>404: Page Not Found</div>} />
       </Routes>
     </Router>

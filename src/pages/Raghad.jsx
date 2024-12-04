@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from "react";
 import { Card, Col, Row, Spinner, Form, Button } from "react-bootstrap";
 import useApiData from "../hooks/useApiData";
 import States from "../components/statesList"; // state list to be used in the search dropdwon
 // import { Navigate } from "react-router-dom";
-const apiKeyRa = process.env.REACT_APP_API_KEY_RA;
+const apiKeyRa = process.env.REACT_APP_API_KEY;
 
 function APIData() {
   const [selectedState, setSelectedState] = useState("OR"); // State for the selected state
@@ -132,7 +131,7 @@ function APIData() {
                     </div>
                     <div className="m-3">
                       <p>Cost Details</p>
-                      {/* navigate("/dashboard",{School:{}}) */}
+                      {/* navigate("/russ",{School:{}}) */}
                     </div>
                   </Card.Footer>
                 </Card.Body>
@@ -145,3 +144,4 @@ function APIData() {
 }
 
 export default APIData;
+>>>>>>> 64ede7e0cd13cbaf426373b47276cc48e4a183f4:src/pages/Raghad.js

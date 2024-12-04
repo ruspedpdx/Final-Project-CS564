@@ -1,7 +1,12 @@
+/* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Currencies from "../components/currencyList"; // currency list
 
 function CurrencyConverter() {
+  const location = useLocation();
+  const school = location.state && location.state.school; // Safely extract school data
+
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [conversionRate, setConversionRate] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -41,37 +46,60 @@ function CurrencyConverter() {
       fetchExchangeRate();
     }
   }, [selectedCurrency]); // Re-fetch data when the selected currency changes
+  if (!school) {
+    return <div>No school data available</div>; // Handle case where no data was passed
+  }
 
   return (
-    <div>
-      <h1>Currency Converter</h1>
-      <label htmlFor="currency">Select Currency:</label>
-      <select
-        id="currency"
-        value={selectedCurrency}
-        onChange={(e) => setSelectedCurrency(e.target.value)}
-      >
-        {Currencies.map((currency) => (
-          <option key={currency} value={currency}>
-            {currency}
-          </option>
-        ))}
-      </select>
+    <>
+      <div>
+        <h1>{school.name}</h1>
+        <p>{school.city}</p>
+      </div>
+      <div>
+        <h1>Currency Converter</h1>
+        <label htmlFor="currency">Select Currency:</label>
+        <select
+          id="currency"
+          value={selectedCurrency}
+          onChange={(e) => setSelectedCurrency(e.target.value)}
+        >
+          {Currencies.map((currency) => (
+            <option key={currency} value={currency}>
+              {currency}
+            </option>
+          ))}
+        </select>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : conversionRate ? (
-        <p>
-          Price in {selectedCurrency}:{" "}
-          <strong>
-            {selectedCurrency} {(basePrice * conversionRate).toFixed(2)}
-          </strong>
-        </p>
-      ) : (
-        <p>{basePrice.toFixed(2)}: Unable to convert.</p>
-      )}
-    </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : conversionRate ? (
+          <p>
+            Price in {selectedCurrency}:{" "}
+            <strong>
+              {selectedCurrency} {(basePrice * conversionRate).toFixed(2)}
+            </strong>
+          </p>
+        ) : (
+          <p>{basePrice.toFixed(2)}: Unable to convert.</p>
+        )}
+      </div>
+    </>
   );
 }
 
 export default CurrencyConverter;
+
+// import { useLocation } from "react-router-dom";
+
+// function Russ() {
+//   const location = useLocation(); 
+//   const school = location.state?.school;
+
+//   return (
+//     <div>
+//       <h1>{school?.name}</h1>
+//       <p>{school?.city}</p>
+//     </div>
+//   );
+// }

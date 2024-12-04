@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "2.11.8",
-    "axios": "0.16.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "axios-mock-adapter": "^2.1.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "4.4.6",
@@ -13,24 +14,29 @@
     "react-chartjs-2": "5.2.0",
     "react-dom": "18.3.1",
     "react-router-dom": "6.28.0",
+    "axios": "^1.7.8",
     "undefined": "0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@testing-library/react": "^16.0.1",
+    "babel-jest": "^29.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "jest": "^27.5.1",
     "prettier": "^3.3.3",
-    "react-scripts": "latest"
+    "react-scripts": "^5.0.1"
   },
   "browserslist": {
     "production": [

@@ -31,65 +31,65 @@ function APIData() {
   };
 
   const handleClearSelection = () => {
-    setSelectedState(""); // Clear the selection
+    setSelectedState("OR"); // Default to oregon
   };
   const handleGraphView = () => {
     // Navigate to the graph page or display graph within this page
-    navigate("/graph"); // Assuming you have a '/graph' page
+    navigate("/graphPage", { state: { schools: result.results } });
   };
 
-  const handleCostDetailsClick = (school) => {
+  const handleCostDetailsClick = () => {
     // Navigate to the Russ page and pass school data
-    navigate("/russ", { state: { school } });
+    navigate("/russ", { state: { schools: result.results } });
   };
 
   return (
-    <main className="container ,m-3, bg-light">
-      {/* <div className="d-flex justify-content-between align-items-center"> */}
-        <h2 className="text-center p-4 m-4">
-          Explore the Top Universities in the USA Sorted by Student Size
-        </h2>
-
+    <main className="gird ">
+      <h2 className="text-center  p-2 m-4">
+        Explore the Top Universities in the USA Sorted by Student Size
+      </h2>
+      <div className=" grid-template-columns: 2fr 3fr 2fr bg -dark  m-2">
         {/* Button to view graph */}
-      {/* </div> */}
-      {/* State Selector */}
-      <div className=" bg-secondary d-flex justify-content-between align-items-center m-3 p-3 border rounded shadow-sm">
-        <Button
-          variant="light"
-          onClick={handleGraphView}
-          style={{ width: "300px" }}
-        >
-          View Graph
-        </Button>
-        <Form.Select
-          className="m-3"
-          value={selectedState}
-          onChange={handleStateChange}
-          aria-label="Select a state"
-        >
-          <option value="">Select a state</option>
-          {States.map(({ code, name }) => (
-            <option key={code} value={code}>
-              {name}
-            </option>
-          ))}
-        </Form.Select>
-        <Button
-          variant="light"
-          className="m-2"
-          style={{ width: "300px"}}
-          onClick={handleClearSelection}
-        >
-          Reset
-        </Button>
+        {/* </div> */}
+        {/* State Selector */}
+        <div className=" bg-black d-flex  shadow-sm">
+          <Button
+            variant="secondary"
+            className="m-3"
+            onClick={handleGraphView}
+            style={{ width: "300px" }}
+          >
+            View Graph
+          </Button>
+          <Form.Select
+            className="m-3"
+            value={selectedState}
+            onChange={handleStateChange}
+            aria-label="Select a state"
+          >
+            <option value="">Select a state</option>
+            {States.map(({ code, name }) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
+          </Form.Select>
+          <Button
+            variant="secondary"
+            className="m-3"
+            style={{ width: "300px" }}
+            onClick={handleClearSelection}
+          >
+            Reset
+          </Button>
+        </div>
       </div>
-
       {/* Error Handling */}
       {isError && <div>Error: Unable to fetch data!</div>}
 
       {/* Loading Spinner */}
       {!isLoaded && url && (
-        <div className="text-center">
+        <div className="text-center m-4">
           <Spinner animation="border" role="status" />
           <span>Loading...</span>
         </div>
@@ -101,13 +101,13 @@ function APIData() {
       )}
 
       {/* Display Results */}
-      <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4 m-5">
         {result &&
           result.results.map((item) => (
             <Col key={item.id}>
               <Card
                 border="black"
-                className="d-flex"
+                className="d-flex m-2"
                 style={{ height: "25rem" }}
               >
                 <Card.Body className="text-center" border="dark">
@@ -137,7 +137,7 @@ function APIData() {
                   <Card.Footer
                     className="justify-content-center align-items-center"
                     variant="bottom"
-                    style={{ height: "8rem" }}
+                    style={{ height: "6rem" }}
                   >
                     <div>
                       {item.school.school_url ? (

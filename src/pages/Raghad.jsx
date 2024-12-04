@@ -144,4 +144,3 @@ function APIData() {
 }
 
 export default APIData;
->>>>>>> 64ede7e0cd13cbaf426373b47276cc48e4a183f4:src/pages/Raghad.js

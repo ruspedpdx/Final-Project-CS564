@@ -38,9 +38,9 @@ function APIData() {
     navigate("/graphPage", { state: { schools: result.results } });
   };
 
-  const handleCostDetailsClick = () => {
-    // Navigate to the Russ page and pass school data
-    navigate("/russ", { state: { schools: result.results } });
+  const handleCostDetailsClick = (item) => {
+    // Pass the specific 'item' (school) data to the 'russ' page
+    navigate("/russ", { state: { school: item } });
   };
 
   return (

@@ -16,10 +16,11 @@ const useApiData = (url) => {
         setIsLoaded(false); // Reset loading state before fetching
         const response = await axios.get(url);
         setData(response.data);
-        setIsLoaded(true);
       } catch (err) {
         setError(`Failed to fetch data: ${err.message}`);
-        setIsLoaded(true); // Ensure loading state is stopped even if there's an error
+        setIsLoaded(true);
+      } finally {
+        setIsLoaded(true);
       }
     };
 

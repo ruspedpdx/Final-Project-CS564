@@ -20,6 +20,7 @@ function APIData() {
   const [selectedState, setSelectedState] = useState("OR"); // Default to Oregon
   const [url, setUrl] = useState("");
   const { data: result, isLoaded, isError } = useApiData(url);
+
   const navigate = useNavigate();
 
   // Update the URL whenever the selected state changes

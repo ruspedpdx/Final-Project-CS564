@@ -13,6 +13,7 @@ function APIData() {
   const [url, setUrl] = useState(""); // API URL
   const { data: result, isLoaded, isError } = useApiData(url);
   console.log(result);
+  
   const navigate = useNavigate();
 
   // Update the URL whenever the selected state changes

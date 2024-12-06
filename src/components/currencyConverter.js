@@ -1,18 +1,18 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
-import Currencies from "../components/currencyList"; // currency list
+import Currencies from "./currencyList"; // currency list
+import buildCurrencySearchUrl from "../utils/buildCurrUrl"; // currency url builder list
 
 function CurrencyConverter() {
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [conversionRate, setConversionRate] = useState(null);
   const [loading, setLoading] = useState(false);
   const basePrice = 1.0;
-  const apiKeyRu = process.env.REACT_APP_API_KEY_RU;
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
-      const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKeyRu}/latest/USD`;
+      const apiUrl = buildCurrencySearchUrl();
 
       setLoading(true); // Show loading while fetching
       try {

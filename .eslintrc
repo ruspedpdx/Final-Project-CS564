@@ -1,17 +1,11 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:react/recommended",
-    "prettier"
-  ],
-  
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["airbnb", "plugin:react/recommended", "prettier"],
+
+  "plugins": ["prettier"],
 
   "env": {
     "browser": true,
-    "es6":true
+    "es6": true,
   },
 
   "rules": {
@@ -23,6 +17,6 @@
                 "some": [ "nesting", "id" ]
             },
             "allowChildren": false
-        }]
-    }
+        }],
+  },
 }

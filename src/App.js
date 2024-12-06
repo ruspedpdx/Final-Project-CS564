@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Raghad from "./pages/Raghad";
 import Dashboard from "./pages/Dashboard";
 import SearchPage from "./pages/SearchPage";
-import CollegePage from "./components/CollegePage";
+import CollegePage from "./pages/CollegePage";
 
 function App() {
   return (

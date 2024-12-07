@@ -21,8 +21,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<SearchPage title="Search Page" />} />
         <Route path="/raghad" element={<Raghad />} />
-        <Route path="/dashboard" element={<Dashboard " />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/college/:name" element={<CollegePage />} />
+        <Route path="/college/:id/:name" element={<CollegePage />} />
         <Route path="*" element={<div>404: Page Not Found</div>} />
       </Routes>
     </Router>

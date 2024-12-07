@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from "react";
 import {
   Card,
@@ -186,6 +185,34 @@ function APIData() {
                       View Cost Details
                     </Button>
                   </div>
+                  <Card.Footer
+                    className="justify-content-center align-items-center"
+                    variant="bottom"
+                    style={{ height: "6rem" }}
+                  >
+                    <div>
+                      {item.school.school_url ? (
+                        <a
+                          href={
+                            item.school.school_url.startsWith("http://") ||
+                            item.school.school_url.startsWith("https://")
+                              ? item.school.school_url
+                              : `http://${item.school.school_url}`
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Visit School Website
+                        </a>
+                      ) : (
+                        <p>No Website Available</p>
+                      )}
+                    </div>
+                    <div className="m-3">
+                      <p>Cost Details</p>
+                      {/* navigate("/russ",{School:{}}) */}
+                    </div>
+                  </Card.Footer>
                 </Card.Body>
               </Card>
             </Col>

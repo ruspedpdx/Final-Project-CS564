@@ -1,4 +1,5 @@
 const Currencies = [
+  "USD",
   "AED",
   "AFN",
   "ALL",

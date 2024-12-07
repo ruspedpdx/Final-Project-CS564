@@ -41,7 +41,7 @@ function APIData() {
   };
 
   const handleCostDetailsClick = (item) => {
-    navigate("/russ", { state: { school: item } });
+    navigate("/dashboard", { state: { school: item } });
   };
 
   return (

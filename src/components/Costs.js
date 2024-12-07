@@ -18,8 +18,8 @@ function Costs({ college }) {
 Costs.propTypes = {
   college: PropTypes.shape({
     "school.name": PropTypes.string.isRequired,
-    "latest.cost.tuition.in_state": PropTypes.string.isRequired,
-    "latest.cost.tuition.out_of_state": PropTypes.string.isRequired,
+    "latest.cost.tuition.in_state": PropTypes.number.isRequired,
+    "latest.cost.tuition.out_of_state": PropTypes.number.isRequired,
   }).isRequired,
 };
 

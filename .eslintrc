@@ -22,7 +22,7 @@
             "required": {
                 "some": [ "nesting", "id" ]
             },
-            "allowChildren": false
+            "allowChildren": false,
         }]
     }
 }

@@ -345,6 +345,13 @@ export function getCompletionRate(data) {
   };
 }
 
+export function getAdmissionRate(data) {
+  if (data === null || data === undefined || data === 0) {
+    return 0;
+  }
+  return Math.round(data * 100);
+}
+
 export function getSpecialDesignations(data) {
   const specialDesignations = [];
 
@@ -462,4 +469,39 @@ export function getSpecialDesignations(data) {
     genderStatus,
     religiousAffiliation,
   };
+}
+
+export function getScores(data) {
+  const sat = {
+    cr: {
+      // Critical Reading
+      p25: data[
+        "latest.admissions.sat_scores.25th_percentile.critical_reading"
+      ],
+      p75: data[
+        "latest.admissions.sat_scores.75th_percentile.critical_reading"
+      ],
+      midpoint: data["latest.admissions.sat_scores.midpoint.critical_reading"],
+      p50: data[
+        "latest.admissions.sat_scores.50th_percentile.critical_reading"
+      ],
+    },
+    math: {
+      p25: data["latest.admissions.sat_scores.25th_percentile.math"],
+      p75: data["latest.admissions.sat_scores.75th_percentile.math"],
+      midpoint: data["latest.admissions.sat_scores.midpoint.math"],
+      p50: data["latest.admissions.sat_scores.50th_percentile.math"],
+    },
+    avg: data["latest.admissions.sat_scores.average.overall"],
+  };
+
+  const act = {
+    cumulative: {
+      p25: data["latest.admissions.act_scores.25th_percentile.cumulative"],
+      p75: data["latest.admissions.act_scores.75th_percentile.cumulative"],
+      midpoint: data["latest.admissions.act_scores.midpoint.cumulative"],
+    },
+  };
+
+  return { sat, act };
 }

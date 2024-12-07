@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [currencySymbol, setCurrencySymbol] = useState(
     getCurrencySymbol("USD")
   ); // Default symbol
-  const [currencyName, setCurrencyName] = useState(getCurrencyName("USD")); // Default symbol
+  const [currencyName, setCurrencyName] = useState(getCurrencyName("USD")); // Default name
 
   if (!schoolData || schoolData.length === 0) {
     return <p>No data available.</p>;
@@ -32,24 +32,24 @@ const Dashboard = () => {
       "Tuition (In-State)",
       "Tuition (Out-of-State)",
       "Books and Supplies",
-      "Other Expenses (On Campus)",
-      "Other Expenses (Off Campus)",
       "Room & Board (On Campus)",
       "Room & Board (Off Campus)",
+      "Other (On Campus)",
+      "Other (Off Campus)",
     ],
     datasets: [
       {
-        label: `Cost in ${currencySymbol || "USD"}`, // Dynamic title with fallback
+        label: `Cost in ${currencyName || "Currency not Found"}`,
         data: [
           schoolData.latest.cost.tuition.in_state * conversionRates || null,
           schoolData.latest.cost.tuition.out_of_state * conversionRates || null,
           schoolData.latest.cost.booksupply * conversionRates || null,
+          schoolData.latest.cost.roomboard.oncampus * conversionRates || null,
+          schoolData.latest.cost.roomboard.offcampus * conversionRates || null,
           schoolData.latest.cost.otherexpense.oncampus * conversionRates ||
             null,
           schoolData.latest.cost.otherexpense.offcampus * conversionRates ||
             null,
-          schoolData.latest.cost.roomboard.oncampus * conversionRates || null,
-          schoolData.latest.cost.roomboard.offcampus * conversionRates || null,
         ].map((value) => value || "No Data Available"), // Ensure consistent fallback
         backgroundColor: [
           "rgba(0, 122, 255, 0.8)", // Blue
@@ -97,7 +97,7 @@ const Dashboard = () => {
           beginAtZero: true, // Start y-axis at zero
           title: {
             display: true,
-            text: "Cost", // Label for the y-axis
+            text: `Cost in ${currencySymbol || "USD"}`, // Label for the y-axis
           },
         },
         x: {
@@ -188,23 +188,7 @@ const Dashboard = () => {
               })}`,
             },
             {
-              label: "Other Expenses:",
-              usdValue: `$${schoolData.latest.cost.otherexpense.offcampus.toLocaleString(
-                "en-US",
-                {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                }
-              )}`,
-              exchValue: `${(
-                schoolData.latest.cost.otherexpense.offcampus * conversionRates
-              ).toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}`,
-            },
-            {
-              label: "Room & Board:",
+              label: "Room & Board (Off Campus):",
               usdValue: `$${schoolData.latest.cost.roomboard.offcampus.toLocaleString(
                 "en-US",
                 {
@@ -214,6 +198,22 @@ const Dashboard = () => {
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.roomboard.offcampus * conversionRates
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+            {
+              label: "Other Expenses (Off Campus):",
+              usdValue: `$${schoolData.latest.cost.otherexpense.offcampus.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.otherexpense.offcampus * conversionRates
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
@@ -229,7 +229,7 @@ const Dashboard = () => {
                   USD : {cardItem.usdValue}
                 </Card.Body>
                 <Card.Footer style={{ height: "4rem" }}>
-                  Exchange : {currencySymbol}
+                  {currencyName} : {currencySymbol}
                   {cardItem.exchValue}
                 </Card.Footer>
               </Card>

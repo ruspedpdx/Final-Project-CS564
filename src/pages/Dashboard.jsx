@@ -10,8 +10,9 @@ import React from "react";
 import { Row, Card, Col } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
+// import CurrencyConverter from "../hooks/currencyConverter";
 
-const exchangeRate = 1.2;
+const exchangeRate = 1.2; // CurrencyConverter({ selectedCurrency }, "USD");
 
 const Dashboard = () => {
   const location = useLocation();
@@ -35,7 +36,8 @@ const Dashboard = () => {
       {
         label: "Cost in (selected currency)",
         data: [
-          schoolData.latest.cost.tuition.in_state * exchangeRate,
+          schoolData.latest.cost.tuition.in_state * exchangeRate ||
+            "no available",
           schoolData.latest.cost.tuition.out_of_state * exchangeRate,
           schoolData.latest.cost.booksupply * exchangeRate,
           schoolData.latest.cost.otherexpense.oncampus * exchangeRate,
@@ -194,6 +196,11 @@ const Dashboard = () => {
           <div className="square rounded border border-2 border-secondary text-center">
             {/* Bar Chart */}
             <h1 className="m-4">{schoolData.school.name} Expense Breakdown</h1>
+            <h2 className="m-4">
+              Expense information is provided to help estimate costs and may not
+              be available for all expense types. Verify the current data by
+              contacting your selected school.
+            </h2>
             <Bar className="mb-4" data={chartSchoolData} />
           </div>
         </Row>

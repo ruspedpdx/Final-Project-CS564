@@ -12,8 +12,8 @@ function CurrencyConverter({ selectedCurrency }) {
 
       if (!apiUrl) return;
 
-      setIsLoaded(false); // Indicate loading
-      setError(null); // Reset error state
+      setIsLoaded(false);
+      setError(null);
 
       try {
         const response = await fetch(apiUrl);
@@ -35,7 +35,7 @@ function CurrencyConverter({ selectedCurrency }) {
       } catch (err) {
         setError(err.message);
       } finally {
-        setIsLoaded(true); // Data fetching complete
+        setIsLoaded(true);
       }
     };
 
@@ -44,7 +44,7 @@ function CurrencyConverter({ selectedCurrency }) {
     }
   }, [selectedCurrency]);
 
-  return { exchangeRate };
+  return { exchangeRate, isLoaded, error };
 }
 
 export default CurrencyConverter;

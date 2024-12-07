@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
@@ -36,7 +37,7 @@ function GraphPage() {
   // Get state name from the first school
   const stateName = schools[0]?.school?.state || "Unknown State";
 
-  //colors for datasets
+
   const backgroundColors = [
     "rgba(0, 123, 255, 0.6)", // Modern Blue
     "rgba(40, 167, 69, 0.6)", // Modern Green

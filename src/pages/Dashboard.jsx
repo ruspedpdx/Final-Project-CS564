@@ -119,17 +119,18 @@ const Dashboard = () => {
   return (
     <main className="container align-items-center my-4">
       <div className="square rounded border border-2 border-secondary text-center mb-4">
-        <h1 className="m-4"> {schoolData.school.name} </h1>
+        <h1 className="m-4" style={{ fontSize: "42px" }}>
+          {" "}
+          {schoolData.school.name}{" "}
+        </h1>
         {schoolData.school.alias && (
-          <h2>
+          <h2 style={{ fontSize: "32px" }}>
             {schoolData.school.alias || "No alias available"} -{" "}
             {schoolData.school.city || "Unknown location"}
           </h2>
         )}
         <div className="text-center my-4">
           <CurrencyConverter onCurrencyChange={handleCurrencyChange} />
-        </div>
-        <div className="text-center my-4">
           <h2>{currencyName || "Unknown currency"}</h2>
         </div>
       </div>
@@ -240,11 +241,13 @@ const Dashboard = () => {
           sm={1}
           md={1}
           lg={1}
-          className="flex g-4 m-4 p-4 justify-content-between"
+          className="flex g-4 m-4 justify-content-between"
         >
           <div className="square rounded border border-2 border-secondary text-center">
             {/* Bar Chart */}
-            <h1 className="m-4">{schoolData.school.name} Expense Breakdown</h1>
+            <h1 className="m-4" style={{ fontSize: "42px" }}>
+              {schoolData.school.name} Expense Breakdown
+            </h1>
             <h2 className="m-4">
               Expense information is provided to help estimate costs and may not
               be available for all expense types. Verify the current data by

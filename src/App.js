@@ -20,7 +20,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/searchPage" element={<SearchPage />} />
         <Route path="/raghad" element={<Raghad />} />
-        <Route path="/dashboard" element={<Dashboard title="Results" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<div>404: Page Not Found</div>} />
       </Routes>
     </Router>

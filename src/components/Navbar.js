@@ -24,9 +24,9 @@ function NavMenu() {
             <Nav.Link as={Link} to="/Home" className="text-light">
               Home
             </Nav.Link>
-            <NavDropdown title="Dat page" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/Dat" className=" text-center">
-                Dat Sub_Page
+            <NavDropdown title="College Search" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/search" className="text-center">
+                Search Page
               </NavDropdown.Item>
               <NavDropdown.Item href="#" className="text-center ">
                 Placeholder for items

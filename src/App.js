@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavMenu from "./components/Navbar";
 import Home from "./pages/Home";
 import Raghad from "./pages/Raghad";
-import Russ from "./pages/Russ";
+import Dashboard from "./pages/Dashboard";
 import SearchPage from "./pages/SearchPage";
+import CollegePage from "./pages/CollegePage";
 
 function App() {
   return (
+    // eslint-disable-next-line react/jsx-filename-extension
     <Router>
       <NavMenu />
 
@@ -17,9 +19,11 @@ function App() {
         {" "}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/searchPage" element={<SearchPage />} />
+        <Route path="/search" element={<SearchPage title="Search Page" />} />
         <Route path="/raghad" element={<Raghad />} />
-        <Route path="/russ" element={<Russ title="Russ Page" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/college/:name" element={<CollegePage />} />
+        <Route path="/college/:id/:name" element={<CollegePage />} />
         <Route path="*" element={<div>404: Page Not Found</div>} />
       </Routes>
     </Router>

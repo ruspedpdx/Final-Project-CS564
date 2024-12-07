@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
@@ -5,161 +6,205 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/function-component-definition */
 import "chart.js/auto";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Row, Card, Col } from "react-bootstrap";
-import { Doughnut } from "react-chartjs-2";
+import { useLocation } from "react-router-dom";
+import { Bar } from "react-chartjs-2";
+// import CurrencyConverter from "../hooks/currencyConverter";
 
-const exchangeRate = 1.12;
-
-const testData = [
-  {
-    id: 1,
-    school: {
-      name: "Oregon State University",
-      city: "Corvallis",
-      alias: "OSU",
-    },
-    latest: {
-      cost: {
-        attendance: { academic_year: 14000 },
-        otherexpense: 1494,
-        roomboard: { oncampus: 1946 },
-        tuition: {
-          in_state: 14946,
-          out_of_state: 24946,
-        },
-      },
-    },
-  },
-];
+const exchangeRate = 1.2; // CurrencyConverter({ selectedCurrency }, "USD");
 
 const Dashboard = () => {
-  const [schoolData, setSchoolData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = testData;
-        setSchoolData(data);
-      } catch (error) {
-        console.error("Error fetching school data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+  const location = useLocation();
+  const schoolData = location.state && location.state.school; // Safely extract school data
 
   if (!schoolData || schoolData.length === 0) {
     return <p>No data available.</p>;
   }
-
   // Data for the chart
   const chartSchoolData = {
     labels: [
-      "Academic Year",
-      "Other Expenses",
-      "Room & Board",
       "Tuition (In-State)",
       "Tuition (Out-of-State)",
+      "Books and Supplies",
+      "Other Expenses (On Campus)",
+      "Other Expenses (Off Campus)",
+      "Room & Board (On Campus)",
+      "Room & Board (Off Campus)",
     ],
     datasets: [
       {
+        label: "Cost in (selected currency)",
         data: [
-          schoolData[0].latest.cost.attendance.academic_year * exchangeRate,
-          schoolData[0].latest.cost.otherexpense * exchangeRate,
-          schoolData[0].latest.cost.roomboard.oncampus * exchangeRate,
-          schoolData[0].latest.cost.tuition.in_state * exchangeRate,
-          schoolData[0].latest.cost.tuition.out_of_state * exchangeRate,
+          schoolData.latest.cost.tuition.in_state * exchangeRate ||
+            "no available",
+          schoolData.latest.cost.tuition.out_of_state * exchangeRate,
+          schoolData.latest.cost.booksupply * exchangeRate,
+          schoolData.latest.cost.otherexpense.oncampus * exchangeRate,
+          schoolData.latest.cost.otherexpense.offcampus * exchangeRate,
+          schoolData.latest.cost.roomboard.oncampus * exchangeRate,
+          schoolData.latest.cost.roomboard.offcampus * exchangeRate,
         ],
         backgroundColor: [
-          "#4caf50",
-          "#ffeb3b",
-          "#2196f3",
-          "#ff5722",
-          "#9c27b0",
+          "#4caf50", // Green
+          "#ffeb3b", // Yellow
+          "#2196f3", // Blue
+          "#ff5722", // Orange
+          "#9c27b0", // Purple
+          "#ff4081", // Pink
+          "#8bc34a", // Light Green
         ],
         hoverBackgroundColor: [
-          "#66bb6a",
-          "#fff176",
-          "#42a5f5",
-          "#ff7043",
-          "#ba68c8",
+          "#66bb6a", // Light Green
+          "#fff176", // Light Yellow
+          "#42a5f5", // Light Blue
+          "#ff7043", // Light Orange
+          "#ba68c8", // Light Purple
+          "#ff80ab", // Light Pink
+          "#aed581", // Lighter Green
         ],
       },
     ],
+    options: {
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
   };
 
   return (
     <main className="container align-items-center my-4">
-      <h1 className="text-center mb-4">School Information</h1>
-      {schoolData.map((item) => (
-        <React.Fragment key={item.id}>
-          {/* Doughnut Chart */}
-          <Row xs={1} sm={2} md={2} lg={2} className="g-4 m-4">
-            <Col className="border border-secondary text-center">
-              <h1> {item.school.name} </h1>
-              {item.school.alias && (
-                <h2>
-                  {item.school.alias || "No alias available"} -{" "}
-                  {item.school.city || "Unknown location"}
-                </h2>
-              )}
+      <div className="text-center mb-4">
+        <h1 className="m-4"> {schoolData.school.name} </h1>
+        {schoolData.school.alias && (
+          <h2>
+            {schoolData.school.alias || "No alias available"} -{" "}
+            {schoolData.school.city || "Unknown location"}
+          </h2>
+        )}
+      </div>
+      <React.Fragment key={schoolData.school.name}>
+        {/* Individual Cards */}
+        <Row xs={1} sm={2} md={3} lg={5} className="g-4">
+          {[
+            {
+              label: "Average Annual Cost:",
+              usdValue: `$${schoolData.latest.cost.attendance.academic_year.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.attendance.academic_year * exchangeRate
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+            {
+              label: "Tuition (In-State):",
+              usdValue: `$${schoolData.latest.cost.tuition.in_state.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.tuition.in_state * exchangeRate
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+            {
+              label: "Tuition (Out-of-State):",
+              usdValue: `$${schoolData.latest.cost.tuition.out_of_state.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.tuition.out_of_state * exchangeRate
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+            {
+              label: "Other Expenses:",
+              usdValue: `$${schoolData.latest.cost.otherexpense.offcampus.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.otherexpense.offcampus * exchangeRate
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+            {
+              label: "Room & Board:",
+              usdValue: `$${schoolData.latest.cost.roomboard.offcampus.toLocaleString(
+                "en-US",
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}`,
+              exchValue: `${(
+                schoolData.latest.cost.roomboard.offcampus * exchangeRate
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`,
+            },
+          ].map((cardItem) => (
+            <Col key={cardItem.label}>
+              <Card className="d-flex text-center" style={{ height: "12rem" }}>
+                <Card.Header style={{ height: "4rem" }}>
+                  {cardItem.label}
+                </Card.Header>
+                <Card.Body style={{ height: "4rem" }}>
+                  USD: {cardItem.usdValue}
+                </Card.Body>
+                <Card.Footer style={{ height: "4rem" }}>
+                  Exch: {cardItem.exchValue}
+                </Card.Footer>
+              </Card>
             </Col>
-            <Col className="border border-secondary text-light">
-              <Doughnut data={chartSchoolData} />
-            </Col>
-          </Row>
-
-          {/* Individual Cards */}
-          <Row xs={1} sm={2} md={3} lg={5} className="g-4">
-            {[
-              {
-                label: "Ave Cost Per Year:",
-                value: `$${item.latest.cost.attendance.academic_year.toFixed(2)}`,
-                exchValue: `$${(item.latest.cost.attendance.academic_year * exchangeRate).toFixed(2)}`,
-              },
-              {
-                label: "Other Expenses:",
-                value: `$${item.latest.cost.otherexpense.toFixed(2)}`,
-                exchValue: `$${(item.latest.cost.otherexpense * exchangeRate).toFixed(2)}`,
-              },
-              {
-                label: "Room & Board (On Campus):",
-                value: `$${item.latest.cost.roomboard.oncampus.toFixed(2)}`,
-                exchValue: `$${(item.latest.cost.roomboard.oncampus * exchangeRate).toFixed(2)}`,
-              },
-              {
-                label: "Tuition (In-State):",
-                value: `$${item.latest.cost.tuition.in_state.toFixed(2)}`,
-                exchValue: `$${(item.latest.cost.tuition.in_state * exchangeRate).toFixed(2)}`,
-              },
-              {
-                label: "Tuition (Out-of-State):",
-                value: `$${item.latest.cost.tuition.out_of_state.toFixed(2)}`,
-                exchValue: `$${(item.latest.cost.tuition.out_of_state * exchangeRate).toFixed(2)}`,
-              },
-            ].map((cardItem) => (
-              <Col key={cardItem.label}>
-                <Card className="d-flex" style={{ height: "12rem" }}>
-                  <Card.Header style={{ height: "4rem" }}>
-                    {cardItem.label}
-                  </Card.Header>
-                  <Card.Body style={{ height: "4rem" }}>
-                    USD: {cardItem.value}
-                  </Card.Body>
-                  <Card.Footer style={{ height: "4rem" }}>
-                    Exch: {cardItem.exchValue}
-                  </Card.Footer>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </React.Fragment>
-      ))}
+          ))}
+        </Row>
+        <Row
+          xs={1}
+          sm={1}
+          md={1}
+          lg={1}
+          className="flex g-4 m-4 p-4 justify-content-between"
+        >
+          <div className="square rounded border border-2 border-secondary text-center">
+            {/* Bar Chart */}
+            <h1 className="m-4">{schoolData.school.name} Expense Breakdown</h1>
+            <h2 className="m-4">
+              Expense information is provided to help estimate costs and may not
+              be available for all expense types. Verify the current data by
+              contacting your selected school.
+            </h2>
+            <Bar className="mb-4" data={chartSchoolData} />
+          </div>
+        </Row>
+      </React.Fragment>
     </main>
   );
 };

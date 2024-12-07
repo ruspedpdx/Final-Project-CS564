@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "2.11.8",
-    "@react-spring/web": "^9.7.5",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react-hooks": "^8.0.1",
+    "axios": "^1.7.8",
+    "axios-mock-adapter": "^2.1.0",
     "axios": "0.16.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
@@ -22,21 +25,23 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "react-scripts test"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
     "@testing-library/react": "^16.0.1",
-    "eslint": "^8.57.1",
+    "babel-jest": "^29.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "jest": "^27.5.1",
     "prettier": "^3.3.3",
-    "react-scripts": "latest",
-    "tailwindcss": "^3.4.15"
+    "react-scripts": "^5.0.1"
   },
   "browserslist": {
     "production": [

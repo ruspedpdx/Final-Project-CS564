@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Dashboard from "./pages/Dashboard";
-import CurrencyConverter from "./components/currencyConverterSmall";
+import Dashboard from "../src/pages/Dashboard";
+import CurrencyConverter from "../src/components/currencyConverterSmall";
 
 // Mock the `react-router-dom` module
 jest.mock("react-router-dom", () => ({
@@ -31,7 +32,7 @@ jest.mock("react-router-dom", () => ({
 }));
 
 // Mock the currency conversion rates
-jest.mock("../components/currencyConverter", () => jest.fn(() => 1)); // Assume 1 for testing
+jest.mock("../components/currencyConverterSmall", () => jest.fn(() => 1)); // Assume 1 for testing
 
 describe("Dashboard Component", () => {
   //   test("Chart data is populated with fallback values when no conversion rate", () => {

@@ -47,7 +47,7 @@ function APIData() {
   return (
     <main className="bg-light">
       <Container fluid className="py-5">
-        <h2 className="text-center mb-4">
+        <h2 className="text-center mb-4 " style={{ fontSize: "2rem" }}>
           Explore the Largest Schools in the USA
         </h2>
         <p className="text-center text-muted mb-5">

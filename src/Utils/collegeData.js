@@ -505,3 +505,192 @@ export function getScores(data) {
 
   return { sat, act };
 }
+
+export function getTestScoreRequirement(data) {
+  const requirementCode = data["latest.admissions.test_requirements"];
+  switch (requirementCode) {
+    case 1:
+      return "Test scores are required for admission.";
+    case 2:
+      return "Test scores are recommended but not mandatory.";
+    case 3:
+      return "Test scores are neither required nor recommended.";
+    case 4:
+      return "Test score requirement is unknown.";
+    case 5:
+      return "Test scores are considered but not required.";
+    default:
+      return "N/A";
+  }
+}
+
+export function getCostOfAttendance(data) {
+  return {
+    onCampusRoomAndBoard: data["latest.cost.roomboard.oncampus"] || "N/A",
+    onCampusOtherExpenses: data["latest.cost.otherexpense.oncampus"] || "N/A",
+    offCampusRoomAndBoard: data["latest.cost.roomboard.offcampus"] || "N/A",
+    offCampusOtherExpenses: data["latest.cost.otherexpense.offcampus"] || "N/A",
+    withFamilyOtherExpenses:
+      data["latest.cost.otherexpense.withfamily"] || "N/A",
+    inStateTuition: data["latest.cost.tuition.in_state"] || "N/A",
+    outOfStateTuition: data["latest.cost.tuition.out_of_state"] || "N/A",
+    bookAndSupplies: data["latest.cost.booksupply"] || "N/A",
+  };
+}
+
+export function getEnrollmentData(data) {
+  const rawPartTimeShare = data["latest.student.part_time_share"] || null;
+  const partTimeShare =
+    rawPartTimeShare !== null ? Number(rawPartTimeShare.toFixed(2)) : null;
+  const fullTimeShare =
+    partTimeShare !== null ? Number((1 - partTimeShare).toFixed(2)) : null;
+
+  return {
+    gradStudents: data["latest.student.grad_students"] || null,
+    totalSize: data["latest.student.size"] || null,
+    partTimeShare,
+    fullTimeShare,
+  };
+}
+
+export const getStudentAndFacultyDemographics = (college) => {
+  const studentDemographics = {
+    white: Math.round(
+      (college["latest.student.demographics.race_ethnicity.white"] || 0) * 100
+    ),
+    black: Math.round(
+      (college["latest.student.demographics.race_ethnicity.black"] || 0) * 100
+    ),
+    hispanic: Math.round(
+      (college["latest.student.demographics.race_ethnicity.hispanic"] || 0) *
+        100
+    ),
+    asian: Math.round(
+      (college["latest.student.demographics.race_ethnicity.asian"] || 0) * 100
+    ),
+    aian: Math.round(
+      (college["latest.student.demographics.race_ethnicity.aian"] || 0) * 100
+    ),
+    nhpi: Math.round(
+      (college["latest.student.demographics.race_ethnicity.nhpi"] || 0) * 100
+    ),
+    twoOrMore: Math.round(
+      (college["latest.student.demographics.race_ethnicity.two_or_more"] || 0) *
+        100
+    ),
+    nonResidentAlien: Math.round(
+      (college[
+        "latest.student.demographics.race_ethnicity.non_resident_alien"
+      ] || 0) * 100
+    ),
+    unknown: Math.round(
+      (college["latest.student.demographics.race_ethnicity.unknown"] || 0) * 100
+    ),
+  };
+
+  const facultyDemographics = {
+    white: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.white"] ||
+        0) * 100
+    ),
+    black: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.black"] ||
+        0) * 100
+    ),
+    hispanic: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.hispanic"] ||
+        0) * 100
+    ),
+    asian: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.asian"] ||
+        0) * 100
+    ),
+    aian: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.aian"] ||
+        0) * 100
+    ),
+    nhpi: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.nhpi"] ||
+        0) * 100
+    ),
+    twoOrMore: Math.round(
+      (college[
+        "latest.student.demographics.faculty.race_ethnicity.two_or_more"
+      ] || 0) * 100
+    ),
+    nonResidentAlien: Math.round(
+      (college[
+        "latest.student.demographics.faculty.race_ethnicity.non_resident_alien"
+      ] || 0) * 100
+    ),
+    unknown: Math.round(
+      (college["latest.student.demographics.faculty.race_ethnicity.unknown"] ||
+        0) * 100
+    ),
+  };
+
+  return {
+    studentDemographics,
+    facultyDemographics,
+  };
+};
+
+export function getProgramPercentagesAndNames(data) {
+  const result = [];
+
+  const programNameMap = {
+    legal: "Legal",
+    health: "Health",
+    english: "English",
+    history: "History",
+    library: "Library Science",
+    computer: "Computer Science",
+    language: "Languages",
+    military: "Military Studies",
+    education: "Education",
+    resources: "Natural Resources",
+    biological: "Biological Sciences",
+    humanities: "Humanities",
+    psychology: "Psychology",
+    agriculture: "Agriculture",
+    engineering: "Engineering",
+    mathematics: "Mathematics",
+    architecture: "Architecture",
+    construction: "Construction",
+    communication: "Communications",
+    social_science: "Social Sciences",
+    transportation: "Transportation",
+    multidiscipline: "Multidisciplinary Studies",
+    physical_science: "Physical Sciences",
+    personal_culinary: "Personal & Culinary Services",
+    visual_performing: "Visual & Performing Arts",
+    business_marketing: "Business & Marketing",
+    science_technology: "Science & Technology",
+    philosophy_religious: "Philosophy & Religious Studies",
+    precision_production: "Precision Production",
+    engineering_technology: "Engineering Technology",
+    ethnic_cultural_gender: "Ethnic, Cultural, & Gender Studies",
+    family_consumer_science: "Family & Consumer Sciences",
+    parks_recreation_fitness: "Parks, Recreation, & Fitness",
+    security_law_enforcement: "Security & Law Enforcement",
+    communications_technology: "Communications Technology",
+    mechanic_repair_technology: "Mechanic & Repair Technology",
+    theology_religious_vocation: "Theology & Religious Vocations",
+    public_administration_social_service:
+      "Public Administration & Social Service",
+  };
+
+  for (const [program, readableName] of Object.entries(programNameMap)) {
+    const percentage = data[`latest.academics.program_percentage.${program}`];
+
+    if (percentage > 0) {
+      const percentageValue = percentage * 100;
+
+      result.push({ name: readableName, percentage: percentageValue });
+    }
+  }
+
+  result.sort((a, b) => b.percentage - a.percentage);
+
+  return result;
+}

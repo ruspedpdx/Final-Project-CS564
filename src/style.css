@@ -56,29 +56,70 @@ h1 {
   text-align: center;
 }
 
-.circular-progress-container {
-  width: 150px;
-  height: 150px;
+.circular-progress-container,
+.progress-bar-international {
+  width: 240px;
+  height: 240px;
   margin: 20px auto;
 }
 
-.circular-progressbar-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  animation: progress-animation 2s ease-out forwards;
+.card-ratio {
+  min-height: 250px;
 }
 
-/* Create the animation */
-@keyframes progress-animation {
-  0% {
-    transform: scale(0);
-    opacity: 0;
+.card-cost {
+  min-height: 400px;
+}
+
+.progress-container {
+  background-color: rgba(248, 249, 250, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 5px;
+  padding: 2px;
+  position: relative;
+}
+
+.progress-marker {
+  top: 0;
+  height: 30px;
+  width: 2px;
+  background-color: black;
+}
+
+.progress-marker-label {
+  top: 35px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+@media (min-width: 576px) {
+  .card-ratio {
+    min-height: 200px;
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .card-ratio {
+    min-height: 280px;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-ratio {
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-ratio {
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .card-ratio {
+    min-height: 300x;
   }
 }

@@ -9,6 +9,7 @@ import {
   Form,
   InputGroup,
   Container,
+  Spinner,
 } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import useApiData from "../hooks/useApiData";
@@ -29,6 +30,7 @@ function SearchPage() {
     e.preventDefault();
     const newUrl = buildSearchByNameUrl({ name: schoolName });
     setUrl(newUrl);
+    setCurrentPage(1);
     setShowResults(true);
   };
 
@@ -61,7 +63,17 @@ function SearchPage() {
   }, [data, isLoaded, navigate]);
 
   const renderSearchResults = () => {
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded) {
+      return (
+        <div className="full-page">
+          <div className="text-center">
+            <Spinner animation="border" role="status" />
+            <p className="mt-3">Loading...</p>
+          </div>
+        </div>
+      );
+    }
+
     if (error) {
       return (
         <div>
@@ -136,7 +148,9 @@ function SearchPage() {
               onClick={() => handlePagination(currentPage - 1)}
               disabled={currentPage === 1}
             />
-            <Pagination.Item>{currentPage}</Pagination.Item>
+            <Pagination.Item disabled>
+              {currentPage} of {lastPage}{" "}
+            </Pagination.Item>
             <Pagination.Next
               onClick={() => handlePagination(currentPage + 1)}
               disabled={currentPage === lastPage}

@@ -6,7 +6,7 @@ function Home() {
   return (
     <Container className="text-center my-5 py-5">
       <h2>Welcome to Education Expenses</h2>
-      <h4>Your go-to place to search for information about colleges.</h4>
+      <h3>Your go-to place to search for information about colleges.</h3>
 
       <div className="mt-4">
         <Link to="/search">

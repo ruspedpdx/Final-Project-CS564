@@ -90,7 +90,7 @@ function Academics({ college, conversionRates, currencySymbol }) {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => `${value}%`, // Display percentage on X axis
+          callback: (value) => `${value}%`, 
         },
       },
     },

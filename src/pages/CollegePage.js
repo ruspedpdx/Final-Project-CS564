@@ -10,6 +10,7 @@ import {
   Button,
   Spinner,
 } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
 import useApiData from "../hooks/useApiData";
 import buildSearchByNameUrl from "../utils/buildUrl";
 import Overview from "../components/Overview";
@@ -27,6 +28,7 @@ function CollegePage() {
   const [currencySymbol, setCurrencySymbol] = useState(
     getCurrencySymbol("USD")
   ); // Default symbol
+  const decodedName = decodeURIComponent(name.replace(/-/g, " "));
 
   const fields = [
     "school.name",
@@ -34,6 +36,7 @@ function CollegePage() {
     "school.city",
     "school.state",
     "school.school_url",
+    "school.price_calculator_url",
     "school.locale",
     "school.degrees_awarded.highest",
     "school.degrees_awarded.predominant",
@@ -60,9 +63,55 @@ function CollegePage() {
     "latest.completion.completion_rate_4yr_150nt",
     "latest.completion.completion_rate_less_than_4yr_150nt",
     "latest.admissions",
+    "latest.cost",
+    "latest.student",
+    "student",
+    "latest.completion.completion_rate_4yr_150_nonresident.alien",
+    "latest.completion.completion_rate_l4yr_150_nonresident.alien",
+    "latest.academics",
+    "latest.earnings.10_yrs_after_entry.median",
+    "latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree",
+    "latest.academics.program.program_percentage.legal",
+    "latest.academics.program.program_percentage.health",
+    "latest.academics.program.program_percentage.english",
+    "latest.academics.program.program_percentage.history",
+    "latest.academics.program.program_percentage.library",
+    "latest.academics.program.program_percentage.computer",
+    "latest.academics.program.program_percentage.language",
+    "latest.academics.program.program_percentage.military",
+    "latest.academics.program.program_percentage.education",
+    "latest.academics.program.program_percentage.resources",
+    "latest.academics.program.program_percentage.biological",
+    "latest.academics.program.program_percentage.humanities",
+    "latest.academics.program.program_percentage.psychology",
+    "latest.academics.program.program_percentage.agriculture",
+    "latest.academics.program.program_percentage.engineering",
+    "latest.academics.program.program_percentage.mathematics",
+    "latest.academics.program.program_percentage.architecture",
+    "latest.academics.program.program_percentage.construction",
+    "latest.academics.program.program_percentage.communication",
+    "latest.academics.program.program_percentage.social_science",
+    "latest.academics.program.program_percentage.transportation",
+    "latest.academics.program.program_percentage.multidiscipline",
+    "latest.academics.program.program_percentage.physical_science",
+    "latest.academics.program.program_percentage.personal_culinary",
+    "latest.academics.program.program_percentage.visual_performing",
+    "latest.academics.program.program_percentage.business_marketing",
+    "latest.academics.program.program_percentage.science_technology",
+    "latest.academics.program.program_percentage.philosophy_religious",
+    "latest.academics.program.program_percentage.precision_production",
+    "latest.academics.program.program_percentage.engineering_technology",
+    "latest.academics.program.program_percentage.ethnic_cultural_gender",
+    "latest.academics.program.program_percentage.family_consumer_science",
+    "latest.academics.program.program_percentage.parks_recreation_fitness",
+    "latest.academics.program.program_percentage.security_law_enforcement",
+    "latest.academics.program.program_percentage.communications_technology",
+    "latest.academics.program.program_percentage.mechanic_repair_technology",
+    "latest.academics.program.program_percentage.theology_religious_vocation",
+    "latest.academics.program.program_percentage.public_administration_social_service",
   ]; // Specify the fields you want to fetch
 
-  const url = buildSearchByNameUrl({ name, id, fields }); // Build the URL dynamically
+  const url = buildSearchByNameUrl({ decodedName, id, fields }); // Build the URL dynamically
   const { data, isLoaded, error } = useApiData(url); // Fetch data with the constructed URL
   const navigate = useNavigate();
 
@@ -140,10 +189,18 @@ function CollegePage() {
       <header className="bg-light college-header">
         <Container>
           <Row>
+            <Col xs={12} className="d-flex justify-content-between mt-3 pt-3">
+              <Button
+                variant="outline-primary"
+                onClick={() => navigate("/search")}
+                className="d-flex align-items-center"
+              >
+                <FaSearch className="me-2" />
+                Back to Search
+              </Button>
+              <CurrencyConverter onCurrencyChange={handleCurrencyChange} />
+            </Col>
             <Col className="text-start mt-3 pt-3">
-              <div className="text-end">
-                <CurrencyConverter onCurrencyChange={handleCurrencyChange} />
-              </div>
               <h1 className="display-4 fw-bold mt-3 pt-3 mb-0 pb-0">
                 {college["school.name"]}
               </h1>
@@ -202,10 +259,18 @@ function CollegePage() {
               <Admissions college={college} />
             </Tab>
             <Tab eventKey="academics" title="Academics">
-              <Academics college={college} />
+              <Academics
+                college={college}
+                currencySymbol={currencySymbol}
+                conversionRates={conversionRates}
+              />
             </Tab>
             <Tab eventKey="costs" title="Costs">
-              <Costs college={college} />
+              <Costs
+                college={college}
+                currencySymbol={currencySymbol}
+                conversionRates={conversionRates}
+              />
             </Tab>
             <Tab eventKey="campusLife" title="Campus Life">
               <CampusLife college={college} />

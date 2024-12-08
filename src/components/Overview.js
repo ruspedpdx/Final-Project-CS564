@@ -20,7 +20,7 @@ import {
   getAdmissionRate,
 } from "../utils/collegeData";
 
-function Overview({ college, currencySymbol, conversionRates = 1 }) {
+function Overview({ college, currencySymbol, conversionRates }) {
   const schoolType = getSchoolType(college["school.carnegie_size_setting"]);
   const ownershipType = getOwnershipType(college["school.ownership_peps"]);
   const degreeType = getDegreeType(

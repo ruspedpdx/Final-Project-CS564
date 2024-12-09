@@ -120,10 +120,14 @@ function SearchPage() {
                     </Card.Subtitle>
                     <div className="flex-grow-1" />{" "}
                     <Button
-                      variant="primary"
-                      onClick={() =>
-                        navigate(`/college/${id}/${name.toLowerCase()}`)
+                      variant="dark"
+                      className="px-5 py-2 bg-secondary  border-3 border-warning shadow-sm"
+                       onClick={() => navigate(`/college/${id}/${name.toLowerCase()}`)
                       }
+                      style={{
+                        width: "300px",
+                        borderRadius: "30px",
+                     }} 
                     >
                       View College
                     </Button>

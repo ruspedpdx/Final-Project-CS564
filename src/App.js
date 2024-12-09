@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NavMenu from "./components/Navbar";
 import Home from "./pages/Home";
-import Raghad from "./pages/Raghad";
+import APIData from "./pages/SearchByState";
 import Dashboard from "./pages/Dashboard";
 import SearchPage from "./pages/SearchPage";
 import GraphPage from "./pages/GraphPage";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/raghad" element={<Raghad />} />
+        <Route path="/searchByState" element={<APIData />} />
         <Route path="/graphPage" element={<GraphPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/college/:name" element={<CollegePage />} />

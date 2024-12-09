@@ -89,7 +89,7 @@ function SearchPage() {
 
     return (
       <div>
-        <div className="mb-3">
+        <div className="my-3">
           <p>
             Showing {(page + 1) * resultsPerPage - resultsPerPage + 1} to{" "}
             {Math.min((page + 1) * resultsPerPage, totalResults)} of{" "}

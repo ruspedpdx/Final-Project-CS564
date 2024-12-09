@@ -28,7 +28,8 @@ const buildSearchByNameUrl = ({
   }
 
   params.append("page", page - 1);
-  params.append("per_page", perPage);
+  const validPerPage = perPage > 100 ? 100 : perPage;
+  params.append("per_page", validPerPage);
 
   // Return the full URL with query parameters
   return `${baseUrl}?${params.toString()}`;

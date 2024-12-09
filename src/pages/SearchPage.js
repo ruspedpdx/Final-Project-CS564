@@ -55,10 +55,7 @@ function SearchPage() {
   useEffect(() => {
     if (isLoaded && data && data.results.length === 1) {
       const { "school.name": collegeName, id } = data.results[0];
-      const formattedName = encodeURIComponent(
-        collegeName.replace(/\s+/g, "-").toLowerCase()
-      );
-      navigate(`/college/${id}/${formattedName}`);
+      navigate(`/college/${id}/${collegeName.toLowerCase()}`);
     }
   }, [data, isLoaded, navigate]);
 
@@ -107,14 +104,13 @@ function SearchPage() {
               "school.state": state,
               id,
             } = college;
-            const formattedName = name.replace(/\s+/g, "-").toLowerCase();
 
             return (
               <Col key={id}>
                 <Card className="h-100">
                   <Card.Body className="d-flex flex-column justify-content-between">
                     <a
-                      href={`/college/${id}/${formattedName}`}
+                      href={`/college/${id}/${name.toLowerCase()}`}
                       className="card-title text-decoration-none fw-bold mt-5"
                     >
                       {name}
@@ -126,7 +122,7 @@ function SearchPage() {
                     <Button
                       variant="primary"
                       onClick={() =>
-                        navigate(`/college/${id}/${formattedName}`)
+                        navigate(`/college/${id}/${name.toLowerCase()}`)
                       }
                     >
                       View College

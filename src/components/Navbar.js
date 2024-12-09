@@ -16,8 +16,8 @@ function NavMenu() {
             height="30"
             className="d-inline-block align-top "
           />
-          <span className="text-light">eduExp</span>
-          <h6 className="text-secondary">Education Expenses</h6>
+          <span className="text-warning">eduExp</span>
+          <h6 className="text-light">Education Expenses</h6>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse id="basic-navbar-nav">

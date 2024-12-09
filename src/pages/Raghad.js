@@ -83,7 +83,7 @@ function APIData() {
             className="px-5 py-2 bg-secondary  border-3 border-warning shadow-sm"
             onClick={handleGraphView}
             style={{
-              Width: "300px",
+              width: "300px",
               borderRadius: "30px",
             }}
           >
@@ -181,7 +181,7 @@ function APIData() {
                       variant="secondary"
                       className="w-100 shadow-sm border-2 border-warning"
                       onClick={() => handleCostDetailsClick(item)}
-                      style={{ borderRadius: "30px" }}
+                      style={{ borderRadius: "30px", width: "300px" }}
                     >
                       View Cost Details
                     </Button>

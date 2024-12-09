@@ -117,21 +117,21 @@ const Dashboard = () => {
   };
 
   return (
-    <main className="container align-items-center my-4">
+    <main className="container bg-light align-items-center my-4">
       <div className="square rounded border border-2 border-secondary text-center mb-4">
-        <h1 className="m-4" style={{ fontSize: "42px" }}>
+        <h2 className="m-4" style={{ fontSize: "42px" }}>
           {" "}
           {schoolData.school.name}{" "}
-        </h1>
+        </h2>
         {schoolData.school.alias && (
-          <h2 style={{ fontSize: "32px" }}>
+          <h3 style={{ fontSize: "32px" }}>
             {schoolData.school.alias || "No alias available"} -{" "}
             {schoolData.school.city || "Unknown location"}
-          </h2>
+          </h3>
         )}
         <div className="text-center my-4">
           <CurrencyConverter onCurrencyChange={handleCurrencyChange} />
-          <h2>{currencyName || "Unknown currency"}</h2>
+          <h4 className="m-4"> {currencyName || "Unknown currency"} </h4>
         </div>
       </div>
       <React.Fragment key={schoolData.school.name}>
@@ -153,7 +153,7 @@ const Dashboard = () => {
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })}`,
+              })}  `,
             },
             {
               label: "Tuition (In-State):",
@@ -169,7 +169,7 @@ const Dashboard = () => {
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })}`,
+              })}  `,
             },
             {
               label: "Tuition (Out-of-State):",
@@ -185,7 +185,7 @@ const Dashboard = () => {
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })}`,
+              })}  `,
             },
             {
               label: "Room & Board (Off Campus):",
@@ -201,7 +201,7 @@ const Dashboard = () => {
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })}`,
+              })}  `,
             },
             {
               label: "Other Expenses (Off Campus):",
@@ -217,7 +217,7 @@ const Dashboard = () => {
               ).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })}`,
+              })}  `,
             },
           ].map((cardItem) => (
             <Col key={cardItem.label}>
@@ -245,14 +245,14 @@ const Dashboard = () => {
         >
           <div className="square rounded border border-2 border-secondary text-center">
             {/* Bar Chart */}
-            <h1 className="m-4" style={{ fontSize: "42px" }}>
+            <h2 className="m-4" style={{ fontSize: "42px" }}>
               {schoolData.school.name} Expense Breakdown
-            </h1>
-            <h2 className="m-4">
+            </h2>
+            <p className="m-4">
               Expense information is provided to help estimate costs and may not
               be available for all expense types. Verify the current data by
               contacting your selected school.
-            </h2>
+            </p>
             <Bar
               className="mb-4"
               data={chartSchoolData}

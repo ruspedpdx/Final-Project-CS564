@@ -9,6 +9,7 @@ import {
   Form,
   InputGroup,
   Container,
+  Spinner,
 } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import useApiData from "../hooks/useApiData";
@@ -29,6 +30,7 @@ function SearchPage() {
     e.preventDefault();
     const newUrl = buildSearchByNameUrl({ name: schoolName });
     setUrl(newUrl);
+    setCurrentPage(1);
     setShowResults(true);
   };
 
@@ -53,15 +55,22 @@ function SearchPage() {
   useEffect(() => {
     if (isLoaded && data && data.results.length === 1) {
       const { "school.name": collegeName, id } = data.results[0];
-      const formattedName = encodeURIComponent(
-        collegeName.replace(/\s+/g, "-").toLowerCase()
-      );
-      navigate(`/college/${id}/${formattedName}`);
+      navigate(`/college/${id}/${collegeName.toLowerCase()}`);
     }
   }, [data, isLoaded, navigate]);
 
   const renderSearchResults = () => {
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded) {
+      return (
+        <div className="full-page">
+          <div className="text-center">
+            <Spinner animation="border" role="status" />
+            <p className="mt-3">Loading...</p>
+          </div>
+        </div>
+      );
+    }
+
     if (error) {
       return (
         <div>
@@ -95,14 +104,13 @@ function SearchPage() {
               "school.state": state,
               id,
             } = college;
-            const formattedName = name.replace(/\s+/g, "-").toLowerCase();
 
             return (
               <Col key={id}>
                 <Card className="h-100">
                   <Card.Body className="d-flex flex-column justify-content-between">
                     <a
-                      href={`/college/${id}/${formattedName}`}
+                      href={`/college/${id}/${name.toLowerCase()}`}
                       className="card-title text-decoration-none fw-bold mt-5"
                     >
                       {name}
@@ -114,7 +122,7 @@ function SearchPage() {
                     <Button
                       variant="primary"
                       onClick={() =>
-                        navigate(`/college/${id}/${formattedName}`)
+                        navigate(`/college/${id}/${name.toLowerCase()}`)
                       }
                     >
                       View College
@@ -136,7 +144,9 @@ function SearchPage() {
               onClick={() => handlePagination(currentPage - 1)}
               disabled={currentPage === 1}
             />
-            <Pagination.Item>{currentPage}</Pagination.Item>
+            <Pagination.Item disabled>
+              {currentPage} of {lastPage}{" "}
+            </Pagination.Item>
             <Pagination.Next
               onClick={() => handlePagination(currentPage + 1)}
               disabled={currentPage === lastPage}

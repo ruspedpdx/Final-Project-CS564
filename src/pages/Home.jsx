@@ -1,28 +1,34 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from "react";
+import { Button, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="text-center">
-      <h1 className="m-4" style={{ fontSize: "62px" }}>
-        Welcome to the Education Expense Calculator!
-      </h1>
-      <div className="text-center" style={{ fontSize: "42px" }}>
-        <p>
-          This application helps users estimate the cost of attending colleges
-          and universities in the U.S.
-          <p>
-            Use the <strong>Top U.S. Schools </strong>
-            search to find schools with the largest enrollment in each state
-          </p>
-          <p>
-            The <strong>Search by Name </strong>feature will return information
-            about a particular school.
-          </p>
-          Happy hunting!
-        </p>
+    <Container className="shadow-sm bg-light border-2 border-secondary text-center my-5 py-5">
+      <h2>Welcome to Education Expenses</h2>
+      <h3>Your go-to place to search for information about colleges.</h3>
+
+      <div className="d-flex flex-wrap justify-content-center align-items-center m-5 gap-4">
+        <Link as={Link} to="/search">
+          <Button
+            variant="secondary"
+            className="w-200 shadow-sm border-2 border-warning"
+            style={{ borderRadius: "30px", width: "300px" }}
+          >
+            Search by School
+          </Button>
+        </Link>
+        <Link as={Link} to="/raghad">
+          <Button
+            variant="secondary"
+            className="w-200 shadow-sm border-2 border-warning"
+            style={{ borderRadius: "30px", width: "300px" }}
+          >
+            Search by State
+          </Button>
+        </Link>
       </div>
-    </div>
+    </Container>
   );
 }
 

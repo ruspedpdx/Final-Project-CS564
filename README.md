@@ -8,8 +8,6 @@ You can use the Search by School search to search for the schools with the large
 
 ## Happy hunting!
 
-
-
-
+https://ruspedpdx.github.io/Final-Project-CS564/
 
 

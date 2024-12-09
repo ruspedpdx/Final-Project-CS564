@@ -18,7 +18,7 @@ function Home() {
             Search by School
           </Button>
         </Link>
-        <Link as={Link} to="/raghad">
+        <Link as={Link} to="/searchByState">
           <Button
             variant="secondary"
             className="w-200 shadow-sm border-2 border-warning"

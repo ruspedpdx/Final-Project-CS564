@@ -90,7 +90,7 @@ function Academics({ college, conversionRates, currencySymbol }) {
       x: {
         beginAtZero: true,
         ticks: {
-          callback: (value) => `${value}%`, 
+          callback: (value) => `${value}%`,
         },
       },
     },
@@ -170,7 +170,7 @@ Academics.propTypes = {
     "latest.earnings.10_yrs_after_entry.median": PropTypes.number,
     "latest.earnings.10_yrs_after_entry.consumer.median_by_pred_degree":
       PropTypes.number,
-    "school.carnegie_size_setting": PropTypes.string.isRequired,
+    "school.carnegie_size_setting": PropTypes.number.isRequired,
   }).isRequired,
   conversionRates: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
     .isRequired,

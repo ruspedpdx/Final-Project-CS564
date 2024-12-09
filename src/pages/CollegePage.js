@@ -27,7 +27,6 @@ function CollegePage() {
   const [currencySymbol, setCurrencySymbol] = useState(
     getCurrencySymbol("USD")
   ); // Default symbol
-  const decodedName = decodeURIComponent(name.replace(/-/g, " "));
 
   const fields = [
     "school.name",
@@ -110,7 +109,7 @@ function CollegePage() {
     "latest.academics.program.program_percentage.public_administration_social_service",
   ]; // Specify the fields you want to fetch
 
-  const url = buildSearchByNameUrl({ decodedName, id, fields }); // Build the URL dynamically
+  const url = buildSearchByNameUrl({ name, id, fields }); // Build the URL dynamically
   const { data, isLoaded, error } = useApiData(url); // Fetch data with the constructed URL
   const navigate = useNavigate();
 

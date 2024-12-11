@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <Container className="shadow-sm bg-light border-2 border-secondary text-center my-5 py-5">
-      <h2>Welcome to Education Expenses</h2>
-      <h3>Your go-to place to search for information about colleges.</h3>
+      <h1 className="text-center">Welcome to Education Expenses</h1>
+      <h2>Your go-to place to search for information about colleges.</h2>
 
       <div className="d-flex flex-wrap justify-content-center align-items-center m-5 gap-4">
         <Link as={Link} to="/search">

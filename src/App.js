@@ -12,13 +12,11 @@ import CollegePage from "./pages/CollegePage";
 
 function App() {
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <Router>
       <NavMenu />
 
       <Routes>
         {" "}
-        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/searchByState" element={<APIData />} />

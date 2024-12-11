@@ -47,9 +47,9 @@ function APIData() {
   return (
     <main className="bg-light">
       <Container fluid className="py-5">
-        <h2 className="text-center mb-4 " style={{ fontSize: "2rem" }}>
+        <h1 className="text-center mb-4 " style={{ fontSize: "2rem" }}>
           Explore the Largest Schools in the USA
-        </h2>
+        </h1>
         <p className="text-center text-muted mb-5">
           View schools by enrollment size, tuition cost, and other metrics.
         </p>
@@ -143,9 +143,9 @@ function APIData() {
                       color: "#212529",
                     }}
                   >
-                    <h5 className="mb-0">
+                    <h2 className="mb-0">
                       {item.school.name || "School Name Not Available"}
-                    </h5>
+                    </h2>
                   </Card.Header>
                   <Card.Text className="text-center text-secondary mt-3">
                     <p>City: {item.school.city || "N/A"}</p>

@@ -1,33 +1,27 @@
 {
   "extends": ["airbnb", "plugin:react/recommended", "prettier", "react-app"],
-
   "plugins": ["prettier"],
-
   "env": {
     "browser": true,
-    "es6": true,
+    "es6": true
   },
-
   "rules": {
     "jsx-a11y/label-has-for": [
       2,
       {
         "components": ["Label"],
         "required": {
-          "some": ["nesting", "id"],
+          "some": ["nesting", "id"]
         },
-        "allowChildren": false,
-        "react/jsx-filename-extension": [
-          "as-needed",
-          { "extensions": [".js", ".jsx"] },
-        ],
-      },
+        "allowChildren": false
+      }
     ],
     "react/jsx-filename-extension": [
       1,
       {
-        "ignoreFilesWithoutCode": true,
-      },
-    ],
-  },
+        "extensions": [".js", ".jsx"],
+        "ignoreFilesWithoutCode": true
+      }
+    ]
+  }
 }

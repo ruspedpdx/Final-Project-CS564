@@ -9,7 +9,7 @@ const currencyNames = {
   AUD: "Australian Dollar",
   AWG: "Aruban Florin",
   AZN: "Azerbaijani Manat",
-  BAM: "Bosnia and Herzegovina Convertible Mark",
+  BAM: "Bosnia and Herzegovina Mark",
   BBD: "Barbadian Dollar",
   BDT: "Bangladeshi Taka",
   BGN: "Bulgarian Lev",

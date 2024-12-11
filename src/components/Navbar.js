@@ -8,7 +8,7 @@ function NavMenu() {
     // eslint-disable-next-line react/jsx-filename-extension
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand href="/Home">
+        <Navbar.Brand>
           <img
             alt="mortarboard icon"
             src={mortarboard}

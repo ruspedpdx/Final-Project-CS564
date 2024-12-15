@@ -118,53 +118,64 @@ const Dashboard = () => {
   };
 
   return (
-    <main className="container bg-light align-items-center my-4">
+    <main
+      className="container bg-light align-items-center my-4"
+      style={{ height: "100vh" }}
+    >
       <div className="square rounded border border-2 border-secondary text-center mb-4">
-        <h2 className="m-4" style={{ fontSize: "42px" }}>
+        <h1 className="m-4 text-center" style={{ fontSize: "42px" }}>
           {" "}
           {schoolData.school.name}{" "}
-        </h2>
+        </h1>
         <Button
           variant="secondary"
           className="shadow-sm border-2 border-warning"
           onClick={() => navigate("/searchByState")}
           style={{
-            width: "300px",
+            width: "200px",
             borderRadius: "30px",
           }}
         >
           Go Back to Search
         </Button>
         {schoolData.school.alias && (
-          <h3 style={{ fontSize: "32px" }}>
+          <h3 className="text-center my-4" style={{ fontSize: "24px" }}>
             {schoolData.school.alias || "No alias available"} -{" "}
             {schoolData.school.city || "Unknown location"}
           </h3>
         )}
         <div className="text-center my-4">
           <CurrencyConverter onCurrencyChange={handleCurrencyChange} />
-          <h4 className="m-4"> {currencyName || "Unknown currency"} </h4>
         </div>
       </div>
       <React.Fragment key={schoolData.school.name}>
         {/* Individual Cards */}
-        <Row xs={1} sm={2} md={3} lg={5} className="g-4">
+        <Row xs={1} sm={2} md={3} lg={6} className="g-4">
           {[
+            {
+              label: "Exchange Rate:",
+              usdValue: `$1.00 is approximately`,
+              exchValue: `${conversionRates}`,
+            },
             {
               label: "Average Annual Cost:",
               usdValue: `$${schoolData.latest.cost.attendance.academic_year.toLocaleString(
                 "en-US",
                 {
+                  currencyDisplay: "symbol",
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
+                  localMatcher: "best-fit",
                 }
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.attendance.academic_year *
                 conversionRates
               ).toLocaleString("en-US", {
+                currencyDisplay: "symbol",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                localMatcher: "best-fit",
               })}  `,
             },
             {
@@ -172,15 +183,19 @@ const Dashboard = () => {
               usdValue: `$${schoolData.latest.cost.tuition.in_state.toLocaleString(
                 "en-US",
                 {
+                  currencyDisplay: "symbol",
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
+                  localMatcher: "best-fit",
                 }
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.tuition.in_state * conversionRates
               ).toLocaleString("en-US", {
+                currencyDisplay: "symbol",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                localMatcher: "best-fit",
               })}  `,
             },
             {
@@ -188,15 +203,19 @@ const Dashboard = () => {
               usdValue: `$${schoolData.latest.cost.tuition.out_of_state.toLocaleString(
                 "en-US",
                 {
+                  currencyDisplay: "symbol",
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
+                  localMatcher: "best-fit",
                 }
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.tuition.out_of_state * conversionRates
               ).toLocaleString("en-US", {
+                currencyDisplay: "symbol",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                localMatcher: "best-fit",
               })}  `,
             },
             {
@@ -204,15 +223,19 @@ const Dashboard = () => {
               usdValue: `$${schoolData.latest.cost.roomboard.offcampus.toLocaleString(
                 "en-US",
                 {
+                  currencyDisplay: "symbol",
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
+                  localMatcher: "best-fit",
                 }
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.roomboard.offcampus * conversionRates
               ).toLocaleString("en-US", {
+                currencyDisplay: "symbol",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                localMatcher: "best-fit",
               })}  `,
             },
             {
@@ -220,21 +243,25 @@ const Dashboard = () => {
               usdValue: `$${schoolData.latest.cost.otherexpense.offcampus.toLocaleString(
                 "en-US",
                 {
+                  currencyDisplay: "symbol",
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
+                  localMatcher: "best-fit",
                 }
               )}`,
               exchValue: `${(
                 schoolData.latest.cost.otherexpense.offcampus * conversionRates
               ).toLocaleString("en-US", {
+                currencyDisplay: "symbol",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
+                localMatcher: "best-fit",
               })}  `,
             },
           ].map((cardItem) => (
             <Col key={cardItem.label}>
               <Card className="d-flex text-center" style={{ height: "12rem" }}>
-                <Card.Header style={{ height: "4rem" }}>
+                <Card.Header style={{ height: "4rem", fontWeight: "bold" }}>
                   {cardItem.label}
                 </Card.Header>
                 <Card.Body style={{ height: "4rem" }}>
@@ -253,14 +280,14 @@ const Dashboard = () => {
           sm={1}
           md={1}
           lg={1}
-          className="flex g-4 m-4 justify-content-between"
+          className="flex g-4 m-4 justify-content-center"
         >
           <div className="square rounded border border-2 border-secondary text-center">
             {/* Bar Chart */}
-            <h2 className="m-4" style={{ fontSize: "42px" }}>
+            <h2 className="m-4" style={{ fontSize: "24px" }}>
               {schoolData.school.name} Expense Breakdown
             </h2>
-            <p className="m-4">
+            <p className="m-4" style={{ fontSize: "16px" }}>
               Expense information is provided to help estimate costs and may not
               be available for all expense types. Verify the current data by
               contacting your selected school.
